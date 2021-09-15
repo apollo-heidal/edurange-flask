@@ -15,8 +15,8 @@ fi
 
 echo -e "${GRN}Installing python3-pip, npm, redis-server,  unzip, postgresql, lib-pq-dev, and wget${NC}"
 
-sudo apt update
-sudo apt install -y python3-pip npm redis-server unzip wget postgresql libpq-dev &&
+apt update
+apt install -y python3-pip npm redis-server unzip wget postgresql libpq-dev &&
 pip3 install -r requirements/dev.txt &&
 
 npm install &&
@@ -24,14 +24,14 @@ mkdir data
 mkdir data/tmp
 mkdir logs
 
-sudo -H -u postgres bash -c "echo -e ALTER USER postgres WITH PASSWORD \'passwordfoo\'\; | psql"
-sudo -H -u postgres bash -c "echo -e CREATE DATABASE namefoo\; | psql"
+su --login postgres -c "echo -e ALTER USER postgres WITH PASSWORD \'passwordfoo\'\; | psql"
+su --login postgres -c "echo -e CREATE DATABASE namefoo\; | psql"
 
 echo -e "${GRN}Downloading and setting up terraform${NC}"
 
 wget https://releases.hashicorp.com/terraform/0.12.29/terraform_0.12.29_linux_amd64.zip
 unzip terraform_0.12.29_linux_amd64.zip
-sudo mv terraform /usr/bin/terraform &&
+mv terraform /usr/bin/terraform &&
 
 echo -e "${GRN}Downloading and setting up docker${NC}"
 
@@ -39,9 +39,9 @@ wget -O docker.sh get.docker.com
 chmod +x docker.sh
 ./docker.sh
 echo -e "${GRN}Creating a user group for docker, and adding your account...${NC}"
-sudo groupadd docker
-sudo usermod -aG docker $username
-sudo su $USER --login
+groupadd docker
+usermod -aG docker $username
+su $USER --login
 
 echo -e "${GRN}Done! Next run the first-run setup: ${NC} npm run build"
 echo -e "${GRN}Then, you should be able to run the app any time with ${NC} npm start"
