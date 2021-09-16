@@ -23,4 +23,4 @@ su --login postgres -c "echo -e CREATE DATABASE namefoo\; | psql"
 echo -e "${GRN}Downloading and setting up terraform${NC}"
 wget https://releases.hashicorp.com/terraform/0.12.29/terraform_0.12.29_linux_amd64.zip
 unzip terraform_0.12.29_linux_amd64.zip
-mv terraform /usr/bin/terraform &&
+mv terraform /usr/bin/terraform
