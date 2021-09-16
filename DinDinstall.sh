@@ -9,6 +9,7 @@ apt update
 apt install -y python3-pip npm redis-server unzip wget postgresql libpq-dev &&
 pip3 install -r requirements/dev.txt &&
 
+cp .env.example .env
 npm install && npm run build
 
 mkdir data
